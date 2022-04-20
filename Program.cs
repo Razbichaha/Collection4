@@ -9,10 +9,10 @@ namespace Collection4
         {
             List<string> directoryOfWorkers = new List<string>();
 
-            directoryOfWorkers.Add( "Иванов Иван Иванович");
-            directoryOfWorkers.Add( "Сидоров Сидр Сидорович");
-            directoryOfWorkers.Add( "Тихонов Тихон Тихонович");
-            directoryOfWorkers.Add( "Самсонов Самсон Самсонович");
+            directoryOfWorkers.Add("Иванов Иван Иванович");
+            directoryOfWorkers.Add("Сидоров Сидр Сидорович");
+            directoryOfWorkers.Add("Тихонов Тихон Тихонович");
+            directoryOfWorkers.Add("Самсонов Самсон Самсонович");
 
             int correctioun = 1;
 
@@ -39,7 +39,7 @@ namespace Collection4
                         break;
                     case "удалить":
 
-                       DeleteDossier(directoryOfWorkers, correctioun);
+                        DeleteDossier(directoryOfWorkers, correctioun);
 
                         break;
                     case "закрыть":
@@ -72,7 +72,7 @@ namespace Collection4
                     tempNumber = int.Parse(inputString);
                     tempNumber -= correctioun;
 
-                    if (directoryOfWorkers.Count>tempNumber)
+                    if (directoryOfWorkers.Count > tempNumber)
                     {
                         directoryOfWorkers.RemoveAt(tempNumber);
                         isContinueCycle = false;
@@ -94,15 +94,15 @@ namespace Collection4
         }
 
         static void DefaultMesadge(List<string> directoryOfWorkers, int correctioun)
-    {
-        Console.Clear();
-        OutputMenu();
-        ShowDossier(directoryOfWorkers, correctioun);
-    }
-
-    static void ShowDossier(List<string> directoryOfWorkers, int correctioun)
         {
-            Console.WriteLine("  " + "Фамилия Имя Отчество");
+            Console.Clear();
+            OutputMenu();
+            ShowDossier(directoryOfWorkers, correctioun);
+        }
+
+        static void ShowDossier(List<string> directoryOfWorkers, int correctioun)
+        {
+            Console.WriteLine("   " + "Фамилия Имя Отчество");
 
             int iteration = correctioun;
 
@@ -123,15 +123,7 @@ namespace Collection4
             string patronymic = Console.ReadLine();
 
             string tempString = lastName + " " + name + " " + patronymic;
-
-            //for (int i = 0; i <= directoryOfWorkers.Count; i++)
-            //{
-            //    if (directoryOfWorkers.ContainsKey(i))
-            //    {
-                    directoryOfWorkers.Add(tempString);
-            ;
-            //    }
-            //}
+            directoryOfWorkers.Add(tempString);
         }
 
         static void OutputMenu()
