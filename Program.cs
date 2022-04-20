@@ -7,7 +7,7 @@ namespace Collection4
     {
         static void Main(string[] args)
         {
-           
+
             Dictionary<int, string> directoryOfWorkers = new Dictionary<int, string>();
 
             directoryOfWorkers.Add(0, "Иванов Иван Иванович");
@@ -58,7 +58,7 @@ namespace Collection4
         }
         static void DeleteDossier(Dictionary<int, string> directoryOfWorkers, int correctioun)
         {
-            int tempNumber ;
+            int tempNumber;
 
             bool isContinueCycle = true;
 
@@ -68,37 +68,30 @@ namespace Collection4
 
                 string inputString = Console.ReadLine();
 
-                for (int i = 0; i < inputString.Length; i++)
+                if (int.TryParse(inputString, out tempNumber) /*char.IsNumber(inputString, i)*/)
                 {
-                    if (char.IsNumber(inputString, i))
-                    {
-                        if ((inputString.Length - 1) == i)
-                        {
-                            tempNumber = int.Parse(inputString);
 
-                            if (directoryOfWorkers.ContainsKey(tempNumber))
-                            {
-                                directoryOfWorkers.Remove(tempNumber);
-                                isContinueCycle = false;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Вы ввели не корректный номер");
-                                inputString = "";
-                            }
-                        }
+                    tempNumber = int.Parse(inputString);
+
+                    if (directoryOfWorkers.ContainsKey(tempNumber))
+                    {
+                        directoryOfWorkers.Remove(tempNumber);
+                        isContinueCycle = false;
                     }
                     else
                     {
+                        Console.WriteLine("Вы ввели не корректный номер");
                         inputString = "";
-                        Console.Write("Для указания работника используйте только номер ");
-                        Console.WriteLine();
                     }
-
+                }
+                else
+                {
+                    inputString = "";
+                    Console.Write("Для указания работника используйте только номер ");
+                    Console.WriteLine();
                 }
             }
-
-            DefaultMesadge(directoryOfWorkers,correctioun);
+            DefaultMesadge(directoryOfWorkers, correctioun);
         }
 
         static void DefaultMesadge(Dictionary<int, string> directoryOfWorkers, int correctioun)
@@ -108,11 +101,11 @@ namespace Collection4
             ShowDossier(directoryOfWorkers, correctioun);
         }
 
-        static void ShowDossier(Dictionary<int,string> directoryOfWorkers,int correctioun)
+        static void ShowDossier(Dictionary<int, string> directoryOfWorkers, int correctioun)
         {
-            Console.WriteLine("  "+"Фамилия Имя Отчество");
-            
-            foreach(var fullName in directoryOfWorkers)
+            Console.WriteLine("  " + "Фамилия Имя Отчество");
+
+            foreach (var fullName in directoryOfWorkers)
             {
                 Console.WriteLine($"{fullName.Key + correctioun} - {fullName.Value} ");
             }
@@ -120,7 +113,6 @@ namespace Collection4
 
         static void AddDossier(Dictionary<int, string> directoryOfWorkers)
         {
-
             Console.Write("Введите фамилию - ");
             string lastName = Console.ReadLine();
             Console.Write("Введите имя - ");
@@ -129,9 +121,8 @@ namespace Collection4
             string patronymic = Console.ReadLine();
 
             string tempString = lastName + " " + name + " " + patronymic;
-           
-            directoryOfWorkers.Add(directoryOfWorkers.Count,tempString);
 
+            directoryOfWorkers.Add(directoryOfWorkers.Count, tempString);
         }
 
         static void OutputMenu()
