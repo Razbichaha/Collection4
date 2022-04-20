@@ -7,13 +7,12 @@ namespace Collection4
     {
         static void Main(string[] args)
         {
+            List<string> directoryOfWorkers = new List<string>();
 
-            Dictionary<int, string> directoryOfWorkers = new Dictionary<int, string>();
-
-            directoryOfWorkers.Add(0, "Иванов Иван Иванович");
-            directoryOfWorkers.Add(1, "Сидоров Сидр Сидорович");
-            directoryOfWorkers.Add(2, "Тихонов Тихон Тихонович");
-            directoryOfWorkers.Add(3, "Самсонов Самсон Самсонович");
+            directoryOfWorkers.Add( "Иванов Иван Иванович");
+            directoryOfWorkers.Add( "Сидоров Сидр Сидорович");
+            directoryOfWorkers.Add( "Тихонов Тихон Тихонович");
+            directoryOfWorkers.Add( "Самсонов Самсон Самсонович");
 
             int correctioun = 1;
 
@@ -40,7 +39,7 @@ namespace Collection4
                         break;
                     case "удалить":
 
-                        DeleteDossier(directoryOfWorkers, correctioun);
+                       DeleteDossier(directoryOfWorkers, correctioun);
 
                         break;
                     case "закрыть":
@@ -56,7 +55,7 @@ namespace Collection4
                 }
             }
         }
-        static void DeleteDossier(Dictionary<int, string> directoryOfWorkers, int correctioun)
+        static void DeleteDossier(List<string> directoryOfWorkers, int correctioun)
         {
             int tempNumber;
 
@@ -73,9 +72,9 @@ namespace Collection4
                     tempNumber = int.Parse(inputString);
                     tempNumber -= correctioun;
 
-                    if (directoryOfWorkers.ContainsKey(tempNumber))
+                    if (directoryOfWorkers.Count>tempNumber)
                     {
-                        directoryOfWorkers.Remove(tempNumber);
+                        directoryOfWorkers.RemoveAt(tempNumber);
                         isContinueCycle = false;
                     }
                     else
@@ -94,24 +93,27 @@ namespace Collection4
             DefaultMesadge(directoryOfWorkers, correctioun);
         }
 
-        static void DefaultMesadge(Dictionary<int, string> directoryOfWorkers, int correctioun)
-        {
-            Console.Clear();
-            OutputMenu();
-            ShowDossier(directoryOfWorkers, correctioun);
-        }
+        static void DefaultMesadge(List<string> directoryOfWorkers, int correctioun)
+    {
+        Console.Clear();
+        OutputMenu();
+        ShowDossier(directoryOfWorkers, correctioun);
+    }
 
-        static void ShowDossier(Dictionary<int, string> directoryOfWorkers, int correctioun)
+    static void ShowDossier(List<string> directoryOfWorkers, int correctioun)
         {
             Console.WriteLine("  " + "Фамилия Имя Отчество");
 
+            int iteration = correctioun;
+
             foreach (var fullName in directoryOfWorkers)
             {
-                Console.WriteLine($"{fullName.Key + correctioun} - {fullName.Value} ");
+                Console.WriteLine($"{iteration} - {fullName} ");
+                iteration++;
             }
         }
 
-        static void AddDossier(Dictionary<int, string> directoryOfWorkers)
+        static void AddDossier(List<string> directoryOfWorkers)
         {
             Console.Write("Введите фамилию - ");
             string lastName = Console.ReadLine();
@@ -122,13 +124,14 @@ namespace Collection4
 
             string tempString = lastName + " " + name + " " + patronymic;
 
-            for (int i = 0; i <= directoryOfWorkers.Count; i++)
-            {
-                if (directoryOfWorkers.ContainsKey(i))
-                {
-                    directoryOfWorkers.Add(i, tempString);
-                }
-            }
+            //for (int i = 0; i <= directoryOfWorkers.Count; i++)
+            //{
+            //    if (directoryOfWorkers.ContainsKey(i))
+            //    {
+                    directoryOfWorkers.Add(tempString);
+            ;
+            //    }
+            //}
         }
 
         static void OutputMenu()
