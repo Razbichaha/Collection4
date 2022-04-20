@@ -68,10 +68,10 @@ namespace Collection4
 
                 string inputString = Console.ReadLine();
 
-                if (int.TryParse(inputString, out tempNumber) /*char.IsNumber(inputString, i)*/)
+                if (int.TryParse(inputString, out tempNumber))
                 {
-
                     tempNumber = int.Parse(inputString);
+                    tempNumber -= correctioun;
 
                     if (directoryOfWorkers.ContainsKey(tempNumber))
                     {
@@ -122,7 +122,13 @@ namespace Collection4
 
             string tempString = lastName + " " + name + " " + patronymic;
 
-            directoryOfWorkers.Add(directoryOfWorkers.Count, tempString);
+            for (int i = 0; i <= directoryOfWorkers.Count; i++)
+            {
+                if (directoryOfWorkers.ContainsKey(i))
+                {
+                    directoryOfWorkers.Add(i, tempString);
+                }
+            }
         }
 
         static void OutputMenu()
